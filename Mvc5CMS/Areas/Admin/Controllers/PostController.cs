@@ -1,5 +1,6 @@
 ﻿using Mvc5CMS.Data;
 using Mvc5CMS.Models;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Mvc5CMS.Areas.Admin.Controllers
@@ -9,6 +10,11 @@ namespace Mvc5CMS.Areas.Admin.Controllers
     public class PostController : Controller
     {
         private readonly IPostRepository _repository;
+
+        public PostController() : this(new PostRepository())
+        {
+            
+        }
 
         public PostController(IPostRepository repository)
         {
@@ -27,7 +33,7 @@ namespace Mvc5CMS.Areas.Admin.Controllers
         [Route("create")]
         public ActionResult Create()
         {
-            var model = new Post();
+            var model = new Post() { Tags = new List<string>() { "test-1", "test-2"} };
             return View(model);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Mvc5CMS.Models
@@ -19,6 +20,8 @@ namespace Mvc5CMS.Models
 
         [Display(Name = "Date Published")]
         public DateTime? Published { get; set; }
+
+        public IList<string> Tags { get; set; }
 
         public int AuthorId { get; set; }
     }

@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using Mvc5CMS.Data;
+﻿using Mvc5CMS.Data;
 using System.Linq;
 using System.Web.Mvc;
-using Mvc5CMS.Models;
 
 namespace Mvc5CMS.Areas.Admin.Controllers
 {
@@ -70,7 +68,7 @@ namespace Mvc5CMS.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(string tag)
+        public ActionResult Delete(string tag, bool foo)
         {
             if (!_repository.Exists(tag))
             {

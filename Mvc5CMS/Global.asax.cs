@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Mvc5CMS.Models;
 
 namespace Mvc5CMS
 {
@@ -13,6 +14,8 @@ namespace Mvc5CMS
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            ModelBinders.Binders.Add(typeof(Post), new PostModelBinder());
         }
     }
 }
