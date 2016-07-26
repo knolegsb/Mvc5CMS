@@ -18,6 +18,7 @@ namespace Mvc5CMS.Areas.Admin.Controllers
         // GET: Admin/Post
         public ActionResult Index()
         {
+            var posts = _repository.GetAll();
             return View();
         }
 
@@ -41,7 +42,7 @@ namespace Mvc5CMS.Areas.Admin.Controllers
                 return View(model);
             }
 
-            // TODO: update model in data store
+            _repository.Create(model);
 
             return RedirectToAction("Index");
         }
