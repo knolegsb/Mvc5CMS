@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Mvc5CMS.App_Start;
+using Mvc5CMS.Models;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Mvc5CMS.Models;
 
 namespace Mvc5CMS
 {
@@ -14,6 +11,7 @@ namespace Mvc5CMS
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AuthDbConfig.RegisterAdmin();
 
             ModelBinders.Binders.Add(typeof(Post), new PostModelBinder());
         }

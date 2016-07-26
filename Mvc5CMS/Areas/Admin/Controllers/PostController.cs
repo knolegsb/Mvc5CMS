@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace Mvc5CMS.Areas.Admin.Controllers
 {
-    [RouteArea("Admin")]
+    [RouteArea("admin")]
     [RoutePrefix("post")]
     public class PostController : Controller
     {
