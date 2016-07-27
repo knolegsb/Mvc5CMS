@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Mvc5CMS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Mvc5CMS.Models;
 
 namespace Mvc5CMS.Data
 {
@@ -10,22 +9,72 @@ namespace Mvc5CMS.Data
     {
         public void Create(Post model)
         {
-            throw new NotImplementedException();
+            using (var db = new CmsContext())
+            {
+                var post = db.Posts.SingleOrDefault(p => p.Id == model.Id);
+
+                if (post != null)
+                {
+                    throw new ArgumentException("A post with the id of " + model.Id + " already exists.");
+                }
+
+                //if (string.IsNullOrWhiteSpace(model.Id))
+                //{
+                //    model.Id = model.Title;
+                //}
+
+                //model.Id = model.Id.MakeUrlFriendly();
+                //model.Tags = model.Tags.Select(tag => tag.MakeUrlFriendly()).ToList();
+                
+                db.Posts.Attach(model);
+                db.SaveChanges();
+            }
         }
 
         public void Edit(string id, Post updatedItem)
         {
-            throw new NotImplementedException();
+            using (var db = new CmsContext())
+            {
+                var post = db.Posts.SingleOrDefault(p => p.Id == id);
+
+                if (post == null)
+                {
+                    throw new KeyNotFoundException("A post with the id of " + id + " does not exist in the data store.");
+                }
+
+                //var newId = updatedItem.Id;
+
+                //if (string.IsNullOrWhiteSpace(newId))
+                //{
+                //    newId = updatedItem.Title;
+                //}
+
+                //post.Id = newId.MakeUrlFriendly();
+
+                post.Id = updatedItem.Id;
+                post.Title = updatedItem.Title;
+                post.Content = updatedItem.Content;
+                post.Published = updatedItem.Published;
+                post.Tags = updatedItem.Tags;
+
+                db.SaveChanges();
+            }
         }
 
         public Post Get(string id)
         {
-            throw new NotImplementedException();
+            using (var db = new CmsContext())
+            {
+                return db.Posts.Include("Author").SingleOrDefault(post => post.Id == id);
+            }
         }
 
         public IEnumerable<Post> GetAll()
         {
-            throw new NotImplementedException();
+            using (var db = new CmsContext())
+            {
+                return db.Posts.Include("Author").OrderByDescending(post => post.Created).ToArray();
+            }
         }
     }
 }
